@@ -1,32 +1,53 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <keep-alive>
+      <router-view class="main" />
+    </keep-alive>
+    <van-tabbar :fixed="false" v-model="active" active-color="#ff7500" route>
+      <van-tabbar-item icon="wap-home" :to="{ name: 'tuijian' }"
+        >首页</van-tabbar-item
+      >
+      <van-tabbar-item icon="search" :to="{ name: 'list' }"
+        >分类</van-tabbar-item
+      >
+      <van-tabbar-item icon="shopping-cart" :to="{ name: 'cart' }" :badge="0"
+        >购物车</van-tabbar-item
+      >
+      <van-tabbar-item icon="friends" :to="{ name: 'user' }"
+        >我的</van-tabbar-item
+      >
+    </van-tabbar>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      active: 0,
+      a: 0,
+    };
+  },
+};
+</script>
 <style>
+html {
+  font-size: 26.666666vw;
+}
+html,
+body,
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
 }
-
-#nav {
-  padding: 30px;
+#app {
+  display: flex;
+  flex-direction: column;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#app .main {
+  flex: 1;
+  overflow: auto;
 }
 </style>

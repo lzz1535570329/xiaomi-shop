@@ -1,27 +1,73 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import { isLogined } from "../utils/auth.js";
+Vue.use(VueRouter);
 
-Vue.use(VueRouter)
-
-  const routes = [
+const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: () => import("../views/Home.vue"),
+    children: [
+      {
+        path: "/tuijian",
+        name: "tuijian",
+        component: () => import("../views/tuijian.vue"),
+      },
+      {
+        path: "/phone",
+        name: "phone",
+        component: () => import("../views/phone.vue"),
+      },
+      {
+        path: "/zhineng",
+        name: "zhineng",
+        component: () => import("../views/zhineng.vue"),
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: "/list",
+    name: "list",
+    component: () => import("../views/list.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login.vue"),
+  },
+  {
+    path: "/reg",
+    name: "reg",
+    component: () => import("../views/reg.vue"),
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: () => import("../views/cart.vue"),
+    meta: { needLogin: true },
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("../views/user.vue"),
+    meta: { needLogin: true },
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.meta.needLogin) {
+    if (isLogined()) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+  } else {
+    next();
+  }
+});
+export default router;
