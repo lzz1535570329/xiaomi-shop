@@ -53,6 +53,12 @@ const routes = [
     component: () => import("../views/user.vue"),
     meta: { needLogin: true },
   },
+  {
+    path: "/xq",
+    name: "xiangqing",
+    component: () => import("../views/xiangqing.vue"),
+    meta: { needLogin: true },
+  },
 ];
 
 const router = new VueRouter({

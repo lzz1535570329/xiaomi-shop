@@ -10,25 +10,29 @@
     </div>
     <div class="nav-list">
       <ul>
-        <li>
-          <router-link class="ft" :to="{ name: 'tuijian' }">推荐</router-link>
+        <li @click="colorChange(0)" style="border-bottom:4px solid orange">
+          <router-link class="ft" :to="{ name: 'tuijian' }" res="hh"
+            >推荐</router-link
+          >
         </li>
-        <li>
-          <router-link class="ft" :to="{ name: 'phone' }">手机</router-link>
+        <li @click="colorChange(1)">
+          <router-link class="ft" :to="{ name: 'phone' }" res="hh"
+            >手机</router-link
+          >
         </li>
-        <li>
+        <li @click="colorChange(2)">
           <router-link class="ft" :to="{ name: 'zhineng' }">智能</router-link>
         </li>
-        <li>
+        <li @click="colorChange(3)">
           <router-link class="ft" :to="{ name: 'phone' }">电视</router-link>
         </li>
-        <li>
+        <li @click="colorChange(4)">
           <router-link class="ft" :to="{ name: 'zhineng' }">笔记本</router-link>
         </li>
-        <li>
+        <li @click="colorChange(5)">
           <router-link class="ft" :to="{ name: 'phone' }">家电</router-link>
         </li>
-        <li>
+        <li @click="colorChange(6)">
           <router-link class="ft" :to="{ name: 'zhineng' }"
             >生活周边</router-link
           >
@@ -45,7 +49,23 @@
 <script>
 export default {
   name: "Home",
-  components: {},
+  data() {
+    return { arr: [], brr: [] };
+  },
+  methods: {
+    colorChange(a) {
+      this.arr = document.querySelectorAll("li");
+      this.brr = document.querySelectorAll(".ft");
+      this.arr.forEach((v) => {
+        v.style.borderBottom = "none";
+      });
+      this.brr.forEach((v) => {
+        v.style.color = "#747474";
+      });
+      this.arr[a].style.borderBottom = "4px solid orange";
+      this.brr[a].style.color = "orange";
+    },
+  },
 };
 </script>
 <style scoped>
@@ -103,9 +123,8 @@ export default {
 }
 .nav-list ul li {
   float: left;
-
   flex-shrink: 0;
-  padding: 0 0.13rem;
+  margin: 0 0.13rem;
 }
 .nav-list ul li .ft {
   color: #747474;
@@ -127,5 +146,8 @@ ul::-webkit-scrollbar {
   width: 0.14rem;
   margin-top: 0.09rem;
   margin-left: 0.14rem;
+}
+.nav-list ul li:visited {
+  border-bottom: 0.02rem solid orange;
 }
 </style>

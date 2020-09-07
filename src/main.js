@@ -6,6 +6,15 @@ import "vant/lib/index.css";
 
 Vue.use(Vant);
 Vue.config.productionTip = false;
+const eventBus = new Vue();
+Vue.prototype.eventBus = eventBus;
+
+Vue.filter("dalImg", (img) => {
+  if (img && img.startsWith("http")) {
+    return img;
+  }
+  return "http://192.168.16.78:3009" + img;
+});
 
 new Vue({
   router,

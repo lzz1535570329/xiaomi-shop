@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view class="main" />
-    </keep-alive>
+    <!-- <keep-alive> -->
+    <router-view class="main" />
+    <!-- </keep-alive> -->
     <van-tabbar :fixed="false" v-model="active" active-color="#ff7500" route>
       <van-tabbar-item icon="wap-home" :to="{ name: 'tuijian' }"
         >首页</van-tabbar-item
@@ -45,9 +45,12 @@ body,
 #app {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 #app .main {
-  flex: 1;
+  /* flex: 1; */
+  width: 100%;
+  height: 100%;
   overflow: auto;
 }
 </style>
