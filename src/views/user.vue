@@ -30,15 +30,15 @@
       <div class="liebiao">
         <ul>
           <li>
-            <van-icon name="balance-pay" size="30" />
+            <van-icon name="balance-pay" size="30" color="	#A9A9A9" />
             <p>待付款</p>
           </li>
           <li>
-            <van-icon name="logistics" size="30" />
+            <van-icon name="logistics" size="30" color="	#A9A9A9" />
             <p>待收货</p>
           </li>
           <li>
-            <van-icon name="setting-o" size="30" />
+            <van-icon name="setting-o" size="30" color="	#A9A9A9" />
             <p>退修换</p>
           </li>
         </ul>
@@ -132,7 +132,7 @@ export default {
 .app {
   width: 100%;
   background-color: #f5f5f5;
-  font-size: 16px;
+  font-size: 14px;
 }
 header {
   width: 100%;
@@ -140,7 +140,7 @@ header {
   background-color: #f37d0f;
 }
 .logo {
-  padding: 0.2rem;
+  padding: 0.25rem;
 }
 header ul li {
   float: left;
@@ -153,13 +153,13 @@ header p {
 .dingdan {
   width: 94%;
   margin: 0 auto;
-  height: 0.3rem;
+  height: 0.5rem;
 }
 .dingdan ul {
   display: flex;
   flex: 1;
   justify-content: space-between;
-  padding-top: 0.05rem;
+  padding-top: 0.15rem;
 }
 .liebiao {
   width: 100%;
