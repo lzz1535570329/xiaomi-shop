@@ -9,7 +9,7 @@
     />
     <div v-for="item in info" :key="item._id" class="product-info">
       <div class="item">
-        <img :src="item.coverImg" alt="" />
+        <img :src="item.coverImg | dalImg" alt="" />
       </div>
       <div class="price">
         <span class="po">￥</span><span class="pt">{{ item.price }}</span>

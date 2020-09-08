@@ -509,9 +509,13 @@ table tr td img {
 }
 .data-info {
   width: 1.8rem;
-  min-height: 1rem;
+  height: 2.86rem;
   float: left;
   margin: 0.1rem 0.035rem;
+}
+.data-info img {
+  width: 180px;
+  height: 180px;
 }
 .data-info .btn {
   width: 1rem;

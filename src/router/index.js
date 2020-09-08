@@ -45,19 +45,16 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: () => import("../views/cart.vue"),
-    meta: { needLogin: true },
   },
   {
     path: "/user",
     name: "user",
     component: () => import("../views/user.vue"),
-    meta: { needLogin: true },
   },
   {
     path: "/xq",
     name: "xiangqing",
     component: () => import("../views/xiangqing.vue"),
-    meta: { needLogin: true },
   },
 ];
 
