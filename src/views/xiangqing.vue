@@ -91,9 +91,10 @@ export default {
 .op {
   background: rgba(255, 255, 255, 0.3);
 }
-.produuct-info {
+.product-info {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .item {
   width: 100%;
@@ -110,13 +111,12 @@ export default {
   font-size: 10px;
   font-weight: 600;
   margin-top: 0.08rem;
-  padding: 0 0 0 0.12rem;
+  margin-left: 0.12rem;
   overflow: hidden;
 }
 .price .po {
   display: block;
   float: left;
-  /* margin-top: -0.01rem; */
   font-size: 10px;
 }
 .price .pt {
@@ -137,7 +137,7 @@ export default {
 }
 .des {
   margin-top: 0.08rem;
-  padding: 0 0 0 0.12rem;
+  margin-left: 0.12rem;
 }
 .des p {
   line-height: 20px;

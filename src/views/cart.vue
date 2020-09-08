@@ -1,6 +1,4 @@
-<template>
-  <h1>购物车</h1>
-</template>
+<template> </template>
 
 <script>
 export default {};

@@ -1,119 +1,99 @@
 <template>
   <div class="app">
     <header>
-      <ul>
-        <li>
-          <van-icon
-            class="logo"
-            name="https://b.yzcdn.cn/vant/icon-demo-1126.png"
-            size="50"
-          />
-        </li>
-        <li>
-          <p>
-            <a @click="goLogin" style="color:#ffffff">{{
-              isLogin ? username : "登录/注册"
-            }}</a>
-          </p>
-        </li>
-      </ul>
+      <div class="avatar">
+        <img src="../assets/123.png" alt="" />
+      </div>
+      <p class="uName">
+        <a @click="goLogin" style="color:#fff">{{
+          isLogin ? username : "登录/注册"
+        }}</a>
+      </p>
     </header>
-    <section>
-      <div style="border-bottom:1px solid #CCCCCC;background-color: #ffffff;">
-        <div class="dingdan">
-          <ul>
-            <li>我的订单</li>
-            <li>全部订单 <a href="#">></a></li>
-          </ul>
-        </div>
+    <div class="dingdan">
+      <span
+        style="float:left;line-height:0.43rem;font-size:15px;margin-left:0.15rem"
+        >我的订单</span
+      >
+      <span
+        style="float:right;line-height:0.43rem;font-size:13px;margin-right:0.25rem;position:relative"
+        >全部订单<van-icon
+          name="arrow "
+          style=";line-height:0.43rem;font-size:16px;position:absolute;top:0;left:0.5rem"
+        />
+      </span>
+    </div>
+    <div class="money">
+      <div>
+        <van-grid :border="false">
+          <van-grid-item icon="pending-payment" text="待付款" class="mo" />
+          <van-grid-item icon="logistics" text="待收货" class="mt" />
+          <van-grid-item icon="replay" text="退换修" class="mr" />
+        </van-grid>
       </div>
-      <div class="liebiao">
-        <ul>
-          <li>
-            <van-icon name="balance-pay" size="30" color="	#A9A9A9" />
-            <p>待付款</p>
-          </li>
-          <li>
-            <van-icon name="logistics" size="30" color="	#A9A9A9" />
-            <p>待收货</p>
-          </li>
-          <li>
-            <van-icon name="setting-o" size="30" color="	#A9A9A9" />
-            <p>退修换</p>
-          </li>
-        </ul>
-      </div>
-      <div class="vip">
-        <ul style="border-bottom:1px solid #cccccc;">
-          <li>
-            <van-icon name="gem" size="30" color="#ffff00" />
-            <span style="margin-left:0.2rem;">会员中心</span>
-          </li>
-          <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>
-        </ul>
-        <ul>
-          <li>
-            <van-icon name="card" size="30" color="#3399FF" />
-            <span style="margin-left:0.2rem;">我的优惠</span>
-          </li>
-          <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>
-        </ul>
-      </div>
-      <div class="vip">
-        <ul style="border-bottom:1px solid #cccccc;">
-          <li>
-            <van-icon name="smile" size="30" color="#CC3333" />
-            <span style="margin-left:0.2rem;">服务中心</span>
-          </li>
-          <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>
-        </ul>
-        <ul>
-          <li>
-            <van-icon name="shop" size="30" color="#FF9900" />
-            <span style="margin-left:0.2rem;">小米之家</span>
-          </li>
-          <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>
-        </ul>
-      </div>
-      <div class="vip">
-        <ul style="border-bottom:1px solid #cccccc;">
-          <li>
-            <van-icon name="underway" size="30" color="#FFCC00" />
-            <span style="margin-left:0.2rem;">我的F码</span>
-          </li>
-          <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>
-        </ul>
-        <ul>
-          <li>
-            <van-icon name="gift" size="30" color="#CC9900" />
-            <span style="margin-left:0.2rem;">礼品码兑换</span>
-          </li>
-          <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>
-        </ul>
-      </div>
-      <div class="vip">
-        <ul>
-          <li>
-            <van-icon name="setting" size="30" color="#333333" />
-            <span style="margin-left:0.2rem;">设置</span>
-          </li>
-          <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>
-        </ul>
-      </div>
-    </section>
+    </div>
+    <ul>
+      <li>
+        <span class="iconfont icon-huangguan" style="color:#ffa400"></span>
+        <p style="border-bottom:1px solid #a1a1a1">会员中心</p>
+      </li>
+      <li>
+        <span class="iconfont icon-qianbao" style="color:#2ca9e1"></span>
+        <p>我的优惠</p>
+      </li>
+      <li style="margin-top: 0.1rem">
+        <span class="iconfont icon-fuwu" style="color:#f05654"></span>
+        <p style="border-bottom:1px solid #a1a1a1">服务中心</p>
+      </li>
+      <li>
+        <span
+          class="iconfont icon-chaoshi"
+          style="color:#ff7500;font-size:0.25rem"
+        ></span>
+        <p>小米之家</p>
+      </li>
+      <li style="margin-top: 0.1rem">
+        <span
+          class="iconfont icon-icon8"
+          style="color:#ffb61e;font-size:0.25rem"
+        ></span>
+        <p style="border-bottom:1px solid #a1a1a1">我的F码</p>
+      </li>
+      <li>
+        <span class="iconfont icon-liwu" style="color:#ffb61e"></span>
+        <p>礼物码兑换</p>
+      </li>
+      <li style="margin-top: 0.1rem;">
+        <span
+          class="iconfont icon-shezhi"
+          style="color:#808080;font-size:0.25rem"
+        ></span>
+        <p>设置</p>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import { getToken } from "../utils/auth";
+import { userInfo } from "../services/userInfo";
+import { ip } from "../utils/ip";
 export default {
   data() {
-    return { username: "", isLogin: false };
+    return {
+      username: "",
+      isLogin: false,
+      imgUrl: "",
+    };
   },
   created() {
     if (getToken()) {
-      this.username = localStorage.getItem("username");
       this.isLogin = true;
+      userInfo().then((res) => {
+        console.log(res);
+        this.username = res.userName;
+        this.imgUrl = ip + res.avatar;
+      });
     }
   },
   methods: {
@@ -136,69 +116,82 @@ export default {
 }
 header {
   width: 100%;
-  height: 1rem;
+  height: 0.83rem;
   background-color: #f37d0f;
 }
-.logo {
-  padding: 0.25rem;
-}
-header ul li {
+.avatar {
+  width: 0.42rem;
+  height: 0.42rem;
   float: left;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #000;
+  margin: 0.16rem 0.1rem 0.16rem 0.2rem;
+  background: #fff;
 }
-header p {
-  /* color: #ffffff; */
-  margin-top: 0.4rem;
-  font-size: 0.15rem;
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+.uName {
+  float: left;
+  font-size: 14px;
+  line-height: 0.83rem;
 }
 .dingdan {
-  width: 94%;
-  margin: 0 auto;
-  height: 0.5rem;
-}
-.dingdan ul {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  padding-top: 0.15rem;
-}
-.liebiao {
   width: 100%;
-  height: 1rem;
-  background-color: #ffffff;
-  /* background-color: aqua; */
+  height: 0.43rem;
+  background: #fff;
+  border-bottom: 1px solid #a1a1a1;
 }
-.liebiao ul {
+.money {
+  width: 100%;
+  min-height: 0.5rem;
+  background-color: #fff;
+  padding: 0 5%;
+}
+.money > div {
   width: 90%;
-  height: 1rem;
-  margin: 0 auto;
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  /* background-color: aquamarine; */
+  /* background-color: red; */
 }
-.liebiao ul li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.mt {
+  margin: 0 0.42rem;
 }
-.vip {
+ul {
   width: 100%;
-  height: 0.9rem;
-  background-color: #ffffff;
+  min-height: 2rem;
+  /* background: red; */
   margin-top: 0.1rem;
-  border-bottom: solid 1px #cccccc;
 }
-.vip ul {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  padding-top: 0.1rem;
+ul li {
+  width: 100%;
+  height: 0.54rem;
+  background-color: #fff;
 }
-.vip ul li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* flex-direction:column; */
+ul li p {
+  width: 85%;
+  height: 100%;
+  /* background: red; */
+  float: right;
+  font-size: 16px;
+  line-height: 0.54rem;
+  position: relative;
+}
+ul li p::after {
+  content: "";
+  position: absolute;
+  right: 0.15rem;
+  top: 50%;
+  width: 0.08rem;
+  height: 0.08rem;
+  border-left: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  transform: translate3d(0, -50%, 0) rotate(135deg);
+}
+ul li .iconfont {
+  float: left;
+  font-size: 0.2rem;
+  line-height: 0.54rem;
+  margin-left: 0.15rem;
 }
 </style>

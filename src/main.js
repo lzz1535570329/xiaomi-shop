@@ -6,6 +6,8 @@ import "vant/lib/index.css";
 import {} from "./views/xiangqing.vue";
 import {} from "./views/tuijian.vue";
 
+import "../src/assets/font_hsy8p53mokl/iconfont.css";
+
 Vue.use(Vant);
 Vue.config.productionTip = false;
 const eventBus = new Vue();

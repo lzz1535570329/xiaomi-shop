@@ -59,7 +59,6 @@ export default {
           if (res.code == "success") {
             Toast.success("登陆成功");
             setToken(res.token);
-            localStorage.setItem("username", values.userName);
             this.$router.push({ name: "Home" });
           } else {
             isShow = true;
