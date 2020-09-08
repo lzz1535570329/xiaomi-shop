@@ -2,9 +2,9 @@
   <div class="app">
     <header>
      <ul>
-       <li> <van-icon class="logo" name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="50" /></li>
+       <li> <van-icon class="logo" name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="50" color="#ffffff" /></li>
        <li><p><a href="#" style="color:#ffffff">登录/注册</a></p></li>
-     </ul>  
+     </ul>
     </header>
     <section>
       <div style="border-bottom:1px solid #CCCCCC;background-color: #ffffff;" >
@@ -17,9 +17,9 @@
       </div>
       <div class="liebiao">
         <ul>
-          <li><van-icon name="balance-pay" size="30" /><p>待付款</p></li>
-          <li><van-icon name="logistics" size="30" /><p>待收货</p></li>
-          <li><van-icon name="setting-o" size="30" /><p>退修换</p></li>
+          <li><van-icon name="balance-pay" size="30"  color="	#A9A9A9" /><p>待付款</p></li>
+          <li><van-icon name="logistics" size="30" color="	#A9A9A9" /><p>待收货</p></li>
+          <li><van-icon name="setting-o" size="30" color="	#A9A9A9" /><p>退修换</p></li>
         </ul>
       </div>
       <div class="vip">
@@ -57,9 +57,7 @@
           <li><van-icon name="setting"  size="30" color="#333333" /> <span style="margin-left:0.2rem;">设置</span></li>
           <li style="margin-right:0.15rem;"><van-icon name="arrow" /></li>      
         </ul>
-      </div>
-      
-      
+      </div>  
     </section>
   </div>
 </template>
@@ -72,7 +70,7 @@ export default {};
 .app{
     width: 100%;
     background-color: #f5f5f5;
-    font-size:16px;
+    font-size:14px;
 }
 header{
   width: 100%;
@@ -80,7 +78,7 @@ header{
   background-color:#F37D0f ;
 }
 .logo{
-  padding: 0.2rem;
+  padding: 0.25rem;
 }
 header ul li{
   float: left;
@@ -93,13 +91,13 @@ header p{
 .dingdan{
   width: 94%;
   margin: 0 auto;
-  height: 0.3rem;
+  height: 0.5rem;
 }
 .dingdan ul{
   display: flex;
   flex: 1;
   justify-content: space-between;
-  padding-top: 0.05rem;
+  padding-top: 0.15rem;
 }
 .liebiao{
   width: 100%;
