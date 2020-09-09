@@ -2,7 +2,8 @@
   <div class="app">
     <header>
       <div class="avatar">
-        <img src="../assets/123.png" alt="" />
+        <img src="../assets/123.png" alt="" v-if="!isShow" />
+        <img :src="imgUrl" alt="" v-if="isShow" />
       </div>
       <p class="uName">
         <a @click="goLogin" style="color:#fff">{{
@@ -84,6 +85,7 @@ export default {
       username: "",
       isLogin: false,
       imgUrl: "",
+      isShow: false,
     };
   },
   created() {
@@ -93,7 +95,10 @@ export default {
         console.log(res);
         this.username = res.userName;
         this.imgUrl = ip + res.avatar;
+        this.isShow = true;
       });
+    } else {
+      this.isShow = false;
     }
   },
   methods: {
@@ -120,12 +125,11 @@ header {
   background-color: #f37d0f;
 }
 .avatar {
-  width: 0.42rem;
-  height: 0.42rem;
+  width: 0.46rem;
+  height: 0.46rem;
   float: left;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #000;
   margin: 0.16rem 0.1rem 0.16rem 0.2rem;
   background: #fff;
 }

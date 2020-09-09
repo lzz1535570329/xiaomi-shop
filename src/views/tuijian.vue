@@ -106,13 +106,13 @@
       </table>
     </div>
     <div class="k30">
-      <div class="fl">
+      <div class="fls">
         <img
           src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d692a30ee3d586c4274575eec255d3c5.jpg?f=webp&w=537&h=762&bg=C1DDE9"
           alt=""
         />
       </div>
-      <div class="fr">
+      <div class="frs">
         <img
           src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/827a686678f39b1bbdc99c6e6b6a13c8.jpg?f=webp&w=537&h=378&bg=DAECFA"
           alt=""
@@ -479,14 +479,14 @@ table tr td img {
   margin-top: 0.05rem;
   overflow: hidden;
 }
-.k30 .fl {
+.k30 .fls {
   float: left;
-  width: 50%;
+  width: 49.5%;
   height: 100%;
 }
-.k30 .fr {
+.k30 .frs {
   float: left;
-  width: 50%;
+  width: 49.5%;
   height: 100%;
 }
 .k30 .fl img {

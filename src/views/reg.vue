@@ -31,12 +31,6 @@
         placeholder="密码"
         class="pw"
       />
-      <p
-        v-show="isShow"
-        style="color:red;font-size:12px;margin-left:0.18rem;margin-top:0.1rem"
-      >
-        请输入正确的ID/密码
-      </p>
       <div style="margin: 0.2rem;">
         <van-button round block type="info" native-type="submit" class="btn">
           注册
@@ -75,18 +69,23 @@ export default {
       console.log(values);
       values.avatar = this.imgUrl;
       let flag = reg0.test(values.userName);
+
       let flat = reg1.test(values.password);
+      console.log(flag);
+      console.log(flat);
       if (flag && flat && values.nickName) {
         this.isShow = false;
         reg(values).then((res) => {
-          // console.log(res);
+          console.log(res);
           if (res.code == "success") {
             Toast.success("注册成功,跳转至登录界面");
             this.$router.push({ name: "login" });
+          } else {
+            Toast.fail("注册失败，用户名已存在");
           }
         });
       } else {
-        this.isShow = true;
+        Toast.fail("ID/用户名不正确");
       }
     },
     afterRead(file) {

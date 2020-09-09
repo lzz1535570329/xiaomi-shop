@@ -89,7 +89,7 @@ export default {
   z-index: 20;
 }
 .op {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
 }
 .product-info {
   width: 100%;

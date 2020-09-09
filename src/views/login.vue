@@ -21,8 +21,6 @@
         placeholder="密码"
         class="pw"
       />
-
-      <p v-show="isShow">用户名/密码不正确</p>
       <div style="margin: 0.2rem;">
         <van-button round block type="info" native-type="submit" class="btn">
           登录
@@ -45,7 +43,6 @@ export default {
     return {
       userName: "",
       password: "",
-      isShow: false,
     };
   },
   methods: {
@@ -61,9 +58,11 @@ export default {
             setToken(res.token);
             this.$router.push({ name: "Home" });
           } else {
-            isShow = true;
+            Toast.fail("用户名不存在");
           }
         });
+      } else {
+        Toast.fail("ID/密码不正确");
       }
     },
     goReg() {
