@@ -28,10 +28,10 @@ instance.interceptors.response.use(
   },
   function(error) {
     if (error && error.response && error.response.status === 401) {
-      Toast.fail("登录信息失效，请重新登录");
-      setTimeout(() => {
-        window.location.href = "/#/login";
-      }, 1000);
+      Toast("未登录");
+      // setTimeout(() => {
+      //   window.location.href = "/#/login";
+      // }, 1000);
     }
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error

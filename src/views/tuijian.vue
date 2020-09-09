@@ -428,10 +428,10 @@ export default {
   methods: {
     async phoneInfo() {
       const res = await getProducts(1);
-      console.log(res);
+      // console.log(res);
       this.datas = res.products.splice(0, 6);
       this.com = res.products.splice(0, 2);
-      console.log(this.datas);
+      // console.log(this.datas);
     },
     route(id) {
       this.$router.push({ name: "xiangqing", query: { id } });

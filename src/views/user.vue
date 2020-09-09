@@ -92,7 +92,7 @@ export default {
     if (getToken()) {
       this.isLogin = true;
       userInfo().then((res) => {
-        console.log(res);
+        // console.log(res);
         this.username = res.userName;
         this.imgUrl = ip + res.avatar;
         this.isShow = true;

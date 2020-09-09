@@ -54,7 +54,7 @@ export default {
   created() {
     // let a = location.search;
     this.id = this.$route.query.id;
-    console.log(this.id);
+    // console.log(this.id);
     this.Info(this.id);
   },
   methods: {
@@ -64,7 +64,7 @@ export default {
       this.info.push(res);
     },
     onClickIcon() {
-      Toast.success("进入购物车");
+      Toast("进入购物车");
       setTimeout(() => {
         this.$router.push({ name: "cart" });
       }, 800);
@@ -73,6 +73,7 @@ export default {
       if (getToken()) {
         addCart(id).then((res) => console.log(res));
         Toast.success("加入购物车成功");
+        this.$store.commit("addNum", 1);
       } else {
         Toast("没登录也配加购物车？");
       }

@@ -10,7 +10,10 @@
       <van-tabbar-item icon="search" :to="{ name: 'list' }"
         >分类</van-tabbar-item
       >
-      <van-tabbar-item icon="shopping-cart" :to="{ name: 'cart' }" :badge="0"
+      <van-tabbar-item
+        icon="shopping-cart"
+        :to="{ name: 'cart' }"
+        :badge="$store.state.amount"
         >购物车</van-tabbar-item
       >
       <van-tabbar-item icon="friends" :to="{ name: 'user' }"
@@ -20,12 +23,22 @@
   </div>
 </template>
 <script>
+import { cartInfo } from "./services/cartInfo";
 export default {
   data() {
     return {
       active: 0,
       a: 0,
     };
+  },
+  created() {
+    cartInfo().then((res) => {
+      // console.log(res);
+      res.forEach((v) => {
+        this.a += v.quantity;
+      });
+      this.$store.commit("addNum", this.a);
+    });
   },
 };
 </script>

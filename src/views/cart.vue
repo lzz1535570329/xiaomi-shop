@@ -1,70 +1,98 @@
 <template>
-  <div>
+  <div
+    style="width:100%;height:100%;position: absolute;top: 0;left: 0;z-index: 20;"
+  >
     <van-nav-bar
       :fixed="true"
-      left-text="返回"
-      left-arrow
+      title="购物车"
       @click-left="onClickLeft"
       class="op"
-    />
+      style="color:'#80080'"
+    >
+      <template #left>
+        <span
+          class="iconfont icon-right-angle"
+          style="font-size:0.22rem;color:#a1a1a1"
+        ></span>
+      </template>
+      <template #right>
+        <span
+          class="iconfont icon-sousuo"
+          style="font-size:0.22rem;color:#a1a1a1"
+        ></span>
+      </template>
+    </van-nav-bar>
     <div
       style="margin-top:0.46rem;width:100%;height:0.54rem;background:#fff"
       class="box"
-      v-show="isShow"
+      v-if="isShow"
     >
       <p class="fl">登陆后享受很多优惠</p>
       <p class="fr" @click="toLogin">去登录</p>
     </div>
-    <div class="carts" v-show="isShow">
+    <div class="carts" v-if="isEnd" style="margin-top:0.46rem">
       <p class="kkong">购物车空空的</p>
       <div class="gguang" @click="goHome">
         去逛逛
       </div>
     </div>
-    <div
-      v-show="!isShow"
-      style="width:100%;min-height:1rem;margin-top:0.46rem;"
-    >
+    <div v-if="!isEnd" style="width:100%;min-height:1rem;margin-top:0.46rem;">
       <div
         v-for="item in cat"
         :key="item.product._id"
         style="width:100%;height:1.04rem;background:#fff;overflow:hidden;margin-top:0.05rem;"
       >
-        <div style="width:100%;height:1.04rem;overflow:hidden">
-          <van-checkbox v-model="item.ckecked" class="onlySel"></van-checkbox>
-          <van-card
-            :title="item.product.name"
-            :thumb="item.product.coverImg | dalImg"
-            class="card"
-            style="margin-top:-0.01rem"
-          >
-            <template #title>
-              <p style="font-size:0.16rem">{{ item.product.name }}</p>
-            </template>
-            <template #desc>
-              <p style="font-size:0.13rem;color:#b1b1b1">
-                售价：{{ item.product.price }}元
-              </p>
-            </template>
-            <template #price>
-              <van-stepper v-model="item.quantity" style="margin-top:-0.3rem" />
-            </template>
-            <template #footer>
-              <span
-                class="iconfont icon-lj"
-                style="display:block;margin-top:-0.3rem;font-size:0.25rem;color:#b1b1b1"
-              ></span>
-            </template>
-          </van-card>
-        </div>
+        <!-- 单选 -->
+        <van-checkbox v-model="item.checked" class="onlySel"></van-checkbox>
+        <van-card class="card" style="margin-top:-0.01rem;position:relative">
+          <template #thumb>
+            <img
+              :src="item.product.coverImg | dalImg"
+              alt=""
+              style="width:0.86rem;height:0.86rem"
+              @click="route(item.product._id)"
+            />
+          </template>
+          <template #title>
+            <p style="font-size:0.16rem" @click="route(item.product._id)">
+              {{ item.product.name }}
+            </p>
+          </template>
+          <template #desc>
+            <p style="font-size:0.13rem;color:#b1b1b1">
+              售价：{{ item.product.price }}元
+            </p>
+          </template>
+          <template #price>
+            <van-stepper v-model="item.quantity" style="margin-top:-0.3rem" />
+          </template>
+          <template #footer>
+            <span
+              class="iconfont icon-lj"
+              style="display:inline-block;position:absolute;bottom:0.1rem;right:0.2rem;font-size:0.25rem;color:#b1b1b1"
+              @click="delProducts(item._id)"
+            ></span>
+          </template>
+        </van-card>
       </div>
     </div>
+    <p
+      v-if="!isEnd"
+      style="width:100%;height:0.35rem;background:#fff;color:#a1a1a1;line-height:0.35rem;font-size:0.13rem;margin-top:0.08rem;text-align:center"
+    >
+      温馨提示：产品购买成功，以最终下单为准，请尽快结算
+    </p>
     <p class="fav">猜你喜欢<span class="sp"></span></p>
     <fieldset class="bord">
       <legend class="leg">实时推荐你的心心念念</legend>
     </fieldset>
     <div class="fav-pro">
-      <div v-for="item in list" :key="item._id" class="list">
+      <div
+        v-for="item in list"
+        :key="item._id"
+        class="list"
+        @click="route(item._id)"
+      >
         <img :src="item.coverImg | dalImg" alt="" />
         <div class="tt">
           <h3>{{ item.name }}</h3>
@@ -72,22 +100,35 @@
         </div>
       </div>
     </div>
+    <!-- 全选 -->
+    <van-submit-bar
+      :fixed="false"
+      :price="numCount() * 100"
+      button-text="提交订单"
+    >
+      <van-checkbox v-model="checkAll">全选</van-checkbox>
+    </van-submit-bar>
   </div>
 </template>
 
 <script>
 import { getProducts } from "../services/products";
 import { cartInfo } from "../services/cartInfo";
+import { delCart } from "../services/delData";
+import { getToken } from "../utils/auth";
 export default {
   data() {
-    return { list: [], cat: [], isShow: true };
+    return { list: [], cat: [], isShow: true, isEnd: true, index: "" };
   },
   created() {
     getProducts().then((res) => {
-      console.log(res);
+      // console.log(res);
       this.list = res.products.splice(0, 8);
     });
-    this.cartInfos();
+    if (getToken()) {
+      this.isShow = false;
+      this.cartInfos();
+    }
   },
   methods: {
     onClickLeft() {
@@ -99,16 +140,53 @@ export default {
     goHome() {
       this.$router.push({ name: "tuijian" });
     },
-    async cartInfos() {
-      const res = await cartInfo();
-      if (res) {
+    cartInfos() {
+      cartInfo().then((res) => {
+        if (res.length > 0) {
+          res.forEach((v) => {
+            v.checked = false;
+          });
+          // console.log(res);
+          this.cat = res;
+          this.isEnd = false;
+          this.isShow = false;
+        } else {
+          this.isEnd = true;
+        }
+      });
+    },
+    numCount() {
+      return this.cat
+        .filter((item) => item.checked)
+        .reduce((pre, cur) => {
+          return pre + cur.product.price * cur.quantity;
+        }, 0);
+    },
+    delProducts(a) {
+      this.index = this.cat.findIndex((v) => (v._id = a));
+      this.cat.splice(this.index, 1);
+      delCart(a).then((res) => {
         console.log(res);
-        res.forEach((v) => {
-          v.checked = false;
-        });
-        this.cat = res;
-        this.isShow = false;
+        this.$store.commit("addNum", res.quantity);
+      });
+      if (this.cat.length == 0) {
+        this.isEnd = true;
       }
+    },
+    route(id) {
+      this.$router.push({ name: "xiangqing", query: { id } });
+    },
+  },
+  computed: {
+    checkAll: {
+      get() {
+        if (this.cat.length > 0) {
+          return this.cat.every((item) => item.checked === true);
+        }
+      },
+      set(v) {
+        this.cat.forEach((item) => (item.checked = v));
+      },
     },
   },
 };
