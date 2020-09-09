@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     onClickLeft() {
-      history.go(-1);
+      this.$router.push({ name: "user" });
     },
     logInfo() {
       Dialog.confirm({

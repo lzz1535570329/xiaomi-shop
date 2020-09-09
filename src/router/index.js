@@ -72,6 +72,16 @@ const routes = [
     name: "address",
     component: () => import("../views/address.vue"),
   },
+  {
+    path: "/addAddress",
+    name: "addAddress",
+    component: () => import("../views/addAddress.vue"),
+  },
+  {
+    path: "/editAddress",
+    name: "editAddress",
+    component: () => import("../views/editAddress.vue"),
+  },
 ];
 
 const router = new VueRouter({

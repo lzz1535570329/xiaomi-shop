@@ -2,7 +2,7 @@
   <div class="box0">
     <van-nav-bar
       :fixed="true"
-      title="收获地址"
+      title="收货地址"
       @click-left="onClickLeft"
       style="color:#80080;background:#f2f2f2"
     >
@@ -14,24 +14,29 @@
       </template>
     </van-nav-bar>
     <!-- 地址信息 -->
-    <div v-if="isShow"></div>
-    <!-- 新增地址 -->
-    <div v-if="isEnd" style="margin-top:0.46rem">
-      <van-address-edit
-        :area-list="areaList"
-        show-postal
-        :show-delete="true"
-        show-set-default
-        show-search-result
-        :search-result="searchResult"
-        :area-columns-placeholder="['请选择', '请选择', '请选择']"
-        @save="onSave"
-        @delete="onDelete"
-        @change-detail="onChangeDetail"
-      />
+    <div style="margin-top:0.51rem;width:100%;min-height:2rem;0verflow:hidden">
+      <div
+        style="width:90%;height:1rem;margin:0.08rem auto 0;border:1px solid #f6f6f6"
+        v-for="item in list"
+        :key="item._id"
+      >
+        <div class="addheader">
+          <p style="color:orange">{{ item.receiver }}</p>
+          <p style="margin-left:0.3rem">
+            {{ item.mobile }}
+          </p>
+          <p style="color:#999;float:right" @click="delAddress(item._id)">
+            删除
+          </p>
+        </div>
+        <div class="addfooter" @click="edit(item._id)">
+          <p style="margin-top:0.08rem">{{ item.regions }}</p>
+          <p>{{ item.address }}</p>
+        </div>
+      </div>
+      <div style="width:100%;height:0.5rem"></div>
     </div>
     <button
-      v-if="isShow"
       type="button"
       class="footer"
       style="background: #ff6700;color: #fff;display:block"
@@ -39,50 +44,51 @@
     >
       新建地址
     </button>
-    <van-button
-      v-if="isEnd"
-      class="footer"
-      style="background: #ff6700;color: #fff;display:block"
-      @click="save"
-      >保存地址
-    </van-button>
   </div>
 </template>
 
 <script>
+import { Toast } from "vant";
+import { getAddressData, delAddressData } from "../services/addAddress";
 export default {
   data() {
-    return { isShow: true, areaList: [], searchResult: [], isEnd: false };
+    return {
+      regions: "河南省-郑州市-二七区",
+      mobile: "",
+      receiver: "",
+      address: "航海路1290号",
+      checked: false,
+      list: [],
+      aslists: [],
+      index: "",
+    };
+  },
+  created() {
+    this.getAddress();
   },
   methods: {
-    add() {
-      this.isShow = false;
-      this.isEnd = true;
+    edit(id) {
+      this.$router.push({ name: "editAddress", query: { id } });
     },
-    save() {
-      this.isEnd = false;
-      this.isShow = true;
+    add() {
+      this.$router.push({ name: "addAddress" });
     },
     onClickLeft() {
-      history.go(-1);
+      this.$router.push({ name: "setAddress" });
     },
-    onSave() {
-      Toast("save");
+    delAddress(id) {
+      delAddressData(id).then((res) => {
+        // console.log(res);
+        this.index = this.list.findIndex((v) => v._id == res._id);
+        this.list.splice(this.index, 1);
+      });
     },
-    onDelete() {
-      Toast("delete");
-    },
-    onChangeDetail(val) {
-      if (val) {
-        this.searchResult = [
-          {
-            name: "黄龙万科中心",
-            address: "杭州市西湖区",
-          },
-        ];
-      } else {
-        this.searchResult = [];
-      }
+    getAddress() {
+      getAddressData().then((res) => {
+        this.aslists = res.addresses;
+        this.list = this.aslists;
+        // console.log(this.aslists);
+      });
     },
   },
 };
@@ -107,5 +113,38 @@ export default {
   left: 0;
   border: 0;
   font-size: 0.16rem;
+}
+.addheader {
+  width: 95%;
+  height: 0.4rem;
+  margin: 0 auto;
+  border-bottom: 1px solid #f6f6f6;
+}
+.addheader p {
+  float: left;
+  line-height: 0.4rem;
+  font-size: 0.14rem;
+}
+.addfooter {
+  width: 95%;
+  height: 0.6rem;
+  margin: 0 auto;
+  position: relative;
+}
+.addfooter p {
+  font-size: 0.13rem;
+  color: #3c3c3c;
+}
+.addfooter::after {
+  content: "";
+  position: absolute;
+  right: 0.1rem;
+  top: 35%;
+  width: 0.07rem;
+  height: 0.07rem;
+  color: #a1a1a1;
+  border-left: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  transform: translate3d(0, -50%, 0) rotate(135deg);
 }
 </style>

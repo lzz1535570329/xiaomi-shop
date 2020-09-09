@@ -56,7 +56,18 @@ export function get(url, params) {
 export function post(url, data) {
   return instance.post(url, data);
 }
-
+/**
+ * delete
+ * @param {*} url
+ */
 export function deleteData(url) {
   return instance.delete(url);
+}
+
+/**
+ * put
+ * @param {*} url
+ */
+export function put(url, data) {
+  return instance.put(url, data);
 }
