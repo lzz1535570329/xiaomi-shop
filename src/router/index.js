@@ -6,16 +6,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "Home",
-  },
-  {
-    path: "/",
     name: "Home",
     component: () => import("../views/Home.vue"),
     children: [
       {
         path: "/",
-        redirect: "tuijian",
+        redirect: "/tuijian",
       },
       {
         path: "/tuijian",

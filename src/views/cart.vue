@@ -10,26 +10,85 @@
     <div
       style="margin-top:0.46rem;width:100%;height:0.54rem;background:#fff"
       class="box"
+      v-show="isShow"
     >
       <p class="fl">登陆后享受很多优惠</p>
       <p class="fr" @click="toLogin">去登录</p>
     </div>
-    <div class="carts">
+    <div class="carts" v-show="isShow">
       <p class="kkong">购物车空空的</p>
       <div class="gguang" @click="goHome">
         去逛逛
+      </div>
+    </div>
+    <div
+      v-show="!isShow"
+      style="width:100%;min-height:1rem;margin-top:0.46rem;"
+    >
+      <div
+        v-for="item in cat"
+        :key="item.product._id"
+        style="width:100%;height:1.04rem;background:#fff;overflow:hidden;margin-top:0.05rem;"
+      >
+        <div style="width:100%;height:1.04rem;overflow:hidden">
+          <van-checkbox v-model="item.ckecked" class="onlySel"></van-checkbox>
+          <van-card
+            :title="item.product.name"
+            :thumb="item.product.coverImg | dalImg"
+            class="card"
+            style="margin-top:-0.01rem"
+          >
+            <template #title>
+              <p style="font-size:0.16rem">{{ item.product.name }}</p>
+            </template>
+            <template #desc>
+              <p style="font-size:0.13rem;color:#b1b1b1">
+                售价：{{ item.product.price }}元
+              </p>
+            </template>
+            <template #price>
+              <van-stepper v-model="item.quantity" style="margin-top:-0.3rem" />
+            </template>
+            <template #footer>
+              <span
+                class="iconfont icon-lj"
+                style="display:block;margin-top:-0.3rem;font-size:0.25rem;color:#b1b1b1"
+              ></span>
+            </template>
+          </van-card>
+        </div>
       </div>
     </div>
     <p class="fav">猜你喜欢<span class="sp"></span></p>
     <fieldset class="bord">
       <legend class="leg">实时推荐你的心心念念</legend>
     </fieldset>
-    <div class="fav-pro"></div>
+    <div class="fav-pro">
+      <div v-for="item in list" :key="item._id" class="list">
+        <img :src="item.coverImg | dalImg" alt="" />
+        <div class="tt">
+          <h3>{{ item.name }}</h3>
+          <p>￥{{ item.price }}元</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { getProducts } from "../services/products";
+import { cartInfo } from "../services/cartInfo";
 export default {
+  data() {
+    return { list: [], cat: [], isShow: true };
+  },
+  created() {
+    getProducts().then((res) => {
+      console.log(res);
+      this.list = res.products.splice(0, 8);
+    });
+    this.cartInfos();
+  },
   methods: {
     onClickLeft() {
       history.go(-1);
@@ -39,6 +98,17 @@ export default {
     },
     goHome() {
       this.$router.push({ name: "tuijian" });
+    },
+    async cartInfos() {
+      const res = await cartInfo();
+      if (res) {
+        console.log(res);
+        res.forEach((v) => {
+          v.checked = false;
+        });
+        this.cat = res;
+        this.isShow = false;
+      }
     },
   },
 };
@@ -151,6 +221,7 @@ export default {
   min-height: 2rem;
   background: #fff;
   margin-top: 0.2rem;
+  overflow: hidden;
 }
 .bord {
   width: 80%;
@@ -165,5 +236,25 @@ export default {
   font-size: 14px;
   color: #a1a1a1;
   margin: 0.05rem auto;
+}
+.list {
+  width: 49%;
+  min-height: 1rem;
+  float: left;
+  margin: 0.05rem 0.015rem;
+}
+.list img {
+  width: 100%;
+  height: 1.5rem;
+}
+.onlySel {
+  float: left;
+  margin-top: 0.41rem;
+  margin-left: 0.05rem;
+}
+.card {
+  width: 90%;
+  background-color: #fff;
+  float: right;
 }
 </style>

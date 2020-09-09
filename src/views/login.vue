@@ -56,7 +56,7 @@ export default {
           if (res.code == "success") {
             Toast.success("登陆成功");
             setToken(res.token);
-            this.$router.push({ name: "Home" });
+            this.$router.push({ name: "tuijian" });
           } else {
             Toast.fail("用户名不存在");
           }

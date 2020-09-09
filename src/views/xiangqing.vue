@@ -43,6 +43,8 @@
 
 <script>
 import { everyInfo } from "../services/everyInfo";
+
+import { getToken } from "../utils/auth";
 import { addCart } from "../services/addcarts";
 import { Toast } from "vant";
 export default {
@@ -68,8 +70,12 @@ export default {
       }, 800);
     },
     onClickButton(id) {
-      addCart(id).then((res) => console.log(res));
-      Toast.success("加入购物车成功");
+      if (getToken()) {
+        addCart(id).then((res) => console.log(res));
+        Toast.success("加入购物车成功");
+      } else {
+        Toast("没登录也配加购物车？");
+      }
     },
     onClickLeft() {
       history.go(-1);

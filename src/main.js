@@ -3,10 +3,12 @@ import App from "./App.vue";
 import router from "./router";
 import Vant from "vant";
 import "vant/lib/index.css";
-import {} from "./views/xiangqing.vue";
-import {} from "./views/tuijian.vue";
+import "./views/xiangqing.vue";
+import "./views/tuijian.vue";
+import "./views/cart.vue";
 
 import "../src/assets/font_hsy8p53mokl/iconfont.css";
+import "../src/assets/font_cvzarclxiqb/iconfont.css";
 
 Vue.use(Vant);
 Vue.config.productionTip = false;

@@ -25,7 +25,7 @@
       </span>
     </div>
     <div class="money">
-      <div>
+      <div class="grid">
         <van-grid :border="false">
           <van-grid-item icon="pending-payment" text="待付款" class="mo" />
           <van-grid-item icon="logistics" text="待收货" class="mt" />
@@ -133,6 +133,11 @@ header {
   margin: 0.16rem 0.1rem 0.16rem 0.2rem;
   background: #fff;
 }
+.grid {
+  width: 100%;
+  min-height: 0.2rem;
+  margin-left: 5%;
+}
 .avatar img {
   width: 100%;
   height: 100%;
@@ -152,7 +157,6 @@ header {
   width: 100%;
   min-height: 0.5rem;
   background-color: #fff;
-  padding: 0 5%;
 }
 .money > div {
   width: 90%;
