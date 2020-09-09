@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import { isLogined } from "../utils/auth.js";
+import { Toast } from "vant";
 Vue.use(VueRouter);
 
 const routes = [
@@ -60,6 +61,17 @@ const routes = [
     name: "xiangqing",
     component: () => import("../views/xiangqing.vue"),
   },
+  {
+    path: "/setAddress",
+    name: "setAddress",
+    component: () => import("../views/setAddress.vue"),
+    meta: { needLogin: true },
+  },
+  {
+    path: "/address",
+    name: "address",
+    component: () => import("../views/address.vue"),
+  },
 ];
 
 const router = new VueRouter({
@@ -71,7 +83,8 @@ router.beforeEach((to, from, next) => {
     if (isLogined()) {
       next();
     } else {
-      next({ name: "Login" });
+      Toast("未登录");
+      next({ name: "login" });
     }
   } else {
     next();

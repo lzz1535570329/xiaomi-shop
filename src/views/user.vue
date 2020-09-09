@@ -64,7 +64,7 @@
         <span class="iconfont icon-liwu" style="color:#ffb61e"></span>
         <p>礼物码兑换</p>
       </li>
-      <li style="margin-top: 0.1rem;">
+      <li style="margin-top: 0.1rem;" @click="toSetAddress">
         <span
           class="iconfont icon-shezhi"
           style="color:#808080;font-size:0.25rem"
@@ -79,6 +79,7 @@
 import { getToken } from "../utils/auth";
 import { userInfo } from "../services/userInfo";
 import { ip } from "../utils/ip";
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -108,6 +109,10 @@ export default {
       } else {
         this.$router.push({ name: "login" });
       }
+    },
+
+    toSetAddress() {
+      this.$router.push({ name: "setAddress" });
     },
   },
 };
