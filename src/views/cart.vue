@@ -22,21 +22,22 @@
         ></span>
       </template>
     </van-nav-bar>
+    <div style="width:100%;height:0.46rem"></div>
     <div
-      style="margin-top:0.46rem;width:100%;height:0.54rem;background:#fff"
+      style="width:100%;height:0.54rem;background:#fff"
       class="box"
       v-if="isShow"
     >
       <p class="fl">登陆后享受很多优惠</p>
       <p class="fr" @click="toLogin">去登录</p>
     </div>
-    <div class="carts" v-if="isEnd" style="margin-top:0.46rem">
+    <div class="carts" v-if="isEnd">
       <p class="kkong">购物车空空的</p>
       <div class="gguang" @click="goHome">
         去逛逛
       </div>
     </div>
-    <div v-if="!isEnd" style="width:100%;min-height:1rem;margin-top:0.46rem;">
+    <div v-if="!isEnd" style="width:100%;min-height:1rem;">
       <div
         v-for="item in cat"
         :key="item.product._id"
@@ -167,11 +168,12 @@ export default {
       this.cat.splice(this.index, 1);
       delCart(a).then((res) => {
         console.log(res);
-        this.$store.commit("addNum", res.quantity);
+        this.$store.commit("addNum", -res.quantity);
+        // console.log();
+        if (this.cat.length == 0) {
+          this.isEnd = true;
+        }
       });
-      if (this.cat.length == 0) {
-        this.isEnd = true;
-      }
     },
     route(id) {
       this.$router.push({ name: "xiangqing", query: { id } });

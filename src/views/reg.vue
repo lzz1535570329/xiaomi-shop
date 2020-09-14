@@ -89,7 +89,7 @@ export default {
       }
     },
     afterRead(file) {
-      console.log(file);
+      // console.log(file);
       const formData = new FormData();
       formData.append("file", file.file);
       load(formData).then((res) => {
